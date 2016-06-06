@@ -20,7 +20,7 @@
    CD-image format residing inside a disk file (*.nrg).
 */
 
-#include "image.h"
+#include <driver/image.h>
 
 #ifdef HAVE_STDIO_H
 #include <stdio.h>
@@ -46,10 +46,15 @@
 #include <cdio/logging.h>
 #include <cdio/util.h>
 #include <cdio/version.h>
-#include "cdio_assert.h"
-#include "_cdio_stdio.h"
 #include "nrg.h"
-#include "cdtext_private.h"
+#include <cdio/track.h>
+#include <driver/image.h>
+#include <udf/udf_private.h>
+#include <driver/cdio_assert.h>
+#include <driver/cdtext_private.h>
+#include <stdio.h>
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
 
 nero_id_t    nero_id;
 nero_dtype_t nero_dtype;
@@ -70,7 +75,7 @@ typedef struct {
 
 
 #define NEED_NERO_STRUCT
-#include "image_common.h"
+#include <driver/image_common.h>
 
 static bool  parse_nrg (_img_private_t *env, const char *psz_cue_name,
 			const cdio_log_level_t log_level);
@@ -931,7 +936,7 @@ _read_audio_sectors_nrg (void *p_user_data, void *data, lsn_t lsn,
   _CDIO_LIST_FOREACH (node, p_env->mapping) {
     _mapping_t *_map = _cdio_list_node_data (node);
 
-    if (IN (lsn, _map->start_lsn, (_map->start_lsn + _map->sec_count - 1))) {
+    if (BETWEEN (lsn, _map->start_lsn, (_map->start_lsn + _map->sec_count - 1))) {
       int ret;
       long int img_offset = _map->img_offset;
 
@@ -972,7 +977,7 @@ _read_mode1_sector_nrg (void *p_user_data, void *data, lsn_t lsn,
   _CDIO_LIST_FOREACH (node, p_env->mapping) {
     _mapping_t *_map = _cdio_list_node_data (node);
 
-    if (IN (lsn, _map->start_lsn, (_map->start_lsn + _map->sec_count - 1))) {
+    if (BETWEEN (lsn, _map->start_lsn, (_map->start_lsn + _map->sec_count - 1))) {
       int ret;
       long int img_offset = _map->img_offset;
 

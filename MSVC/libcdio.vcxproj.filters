@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="driver">
+      <UniqueIdentifier>{d8d5ab16-c358-48b4-9950-313b08bf93d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="driver\win32">
+      <UniqueIdentifier>{bcae5374-edf1-42a9-aff6-ea4462f3f535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iso9660">
+      <UniqueIdentifier>{b2709d10-1c57-410e-8762-0cdada8f4ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="driver\image">
+      <UniqueIdentifier>{dbc698d0-cd58-44ad-8cab-1f9fe3478059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="udf">
+      <UniqueIdentifier>{6407bd9e-08da-460e-ae33-63efcd001df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{60d94af6-755d-4719-ab20-eaa255937cc4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lib\driver\_cdio_generic.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\_cdio_stdio.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\_cdio_stream.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\abs_path.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\audio.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\cd_types.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\cdio.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\cdtext.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\device.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\disc.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\ds.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\image_common.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\logging.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\memory.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\read.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\realpath.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\sector.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\track.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\utf8.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\util.c">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\MSWindows\win32.c">
+      <Filter>driver\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\MSWindows\win32_ioctl.c">
+      <Filter>driver\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\image\bincue.c">
+      <Filter>driver\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\image\cdrdao.c">
+      <Filter>driver\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\driver\image\nrg.c">
+      <Filter>driver\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\iso9660\iso9660.c">
+      <Filter>iso9660</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\iso9660\iso9660_fs.c">
+      <Filter>iso9660</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\iso9660\rock.c">
+      <Filter>iso9660</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\iso9660\xa.c">
+      <Filter>iso9660</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\udf\filemode.c">
+      <Filter>udf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\udf\udf.c">
+      <Filter>udf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\udf\udf_file.c">
+      <Filter>udf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\udf\udf_fs.c">
+      <Filter>udf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\udf\udf_time.c">
+      <Filter>udf</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lib\driver\_cdio_stdio.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\_cdio_stream.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\cdio_assert.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\cdio_private.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\cdtext_private.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\filemode.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\generic.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\image.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\image_common.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\portable.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\MSWindows\win32.h">
+      <Filter>driver\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\driver\image\nrg.h">
+      <Filter>driver\image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\iso9660\iso9660_private.h">
+      <Filter>iso9660</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\udf\udf_fs.h">
+      <Filter>udf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\udf\udf_private.h">
+      <Filter>udf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\audio.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\bytesex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\bytesex_asm.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\cd_types.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\cdio.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\cdtext.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\device.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\disc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\ds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\dvd.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\ecma_167.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\iso9660.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\logging.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\memory.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\mmc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\mmc_cmds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\mmc_hl_cmds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\mmc_ll_cmds.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\mmc_util.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\posix.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\read.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\rock.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\scsi_mmc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\sector.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\track.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\types.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\udf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\udf_file.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\udf_time.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\utf8.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\util.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\xa.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cdio\version.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\include\cdio\version.h.in">
+      <Filter>include</Filter>
+    </None>
+  </ItemGroup>
+</Project>

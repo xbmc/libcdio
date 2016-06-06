@@ -37,3 +37,9 @@
 /missing
 /stamp-h1
 /test-driver
+MSVC/.vs
+MSVC/Debug
+MSVC/Release
+MSVC/*.db
+MSVC/*.opendb
+MSVC/*.user

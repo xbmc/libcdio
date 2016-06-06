@@ -47,8 +47,7 @@
 #undef  MIN
 #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
 
-#undef  IN
-#define IN(x, low, high) ((x) >= (low) && (x) <= (high))
+#define BETWEEN(x, low, high) ((x) >= (low) && (x) <= (high))
 
 #undef  CLAMP
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))

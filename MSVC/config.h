@@ -92,13 +92,13 @@
 #define HAVE_MEMSET 1
 
 /* Define to 1 if you have the `snprintf' function. */
-#undef HAVE_SNPRINTF
+#define HAVE_SNPRINTF 1
 
 /* Define 1 if you have Solaris CD-ROM support */
 #undef HAVE_SOLARIS_CDROM
 
 /* Define to 1 if you have the <stdbool.h> header file. */
-#undef HAVE_STDBOOL_H
+#define HAVE_STDBOOL_H 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
@@ -119,7 +119,7 @@
 #undef HAVE_SYS_CDIO_H
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
+#define HAVE_SYS_STAT_H 1
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
@@ -140,7 +140,7 @@
 #undef HAVE_VCDINFO
 
 /* Define to 1 if you have the `vsnprintf' function. */
-#undef HAVE_VSNPRINTF
+#define HAVE_VSNPRINTF 1
 
 /* Define 1 if you have MinGW CD-ROM support */
 #define HAVE_WIN32_CDROM 1
@@ -186,3 +186,5 @@
    calls it, or to nothing if 'inline' is not supported under any name.  */
 #define inline
 
+#define HAVE_NTDDSCSI_H 1
+#define HAVE_NTDDCDRM_H 1

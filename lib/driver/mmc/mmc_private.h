@@ -16,16 +16,17 @@
 */
 
 #include <cdio/mmc.h>
+#include <cdio/device.h>
 
 /*! Convert milliseconds to seconds taking the ceiling value, i.e.
     1002 milliseconds gets rounded to 2 seconds.
 */
 #define SECS2MSECS 1000
-static inline unsigned int 
-msecs2secs(unsigned int msecs) 
-{
-  return (msecs+(SECS2MSECS-1)) / SECS2MSECS;
-}
+//static inline unsigned int 
+//msecs2secs(unsigned int msecs) 
+//{
+//  return (msecs+(SECS2MSECS-1)) / SECS2MSECS;
+//}
 #undef SECS2MSECS
 
 /***********************************************************

@@ -23,12 +23,6 @@
    residing inside a disk file (*.bin) and its associated cue sheet.
    (*.cue).
 */
-#include "portable.h"
-#include "image.h"
-#include "cdio_assert.h"
-#include "cdio_private.h"
-#include "cdtext_private.h"
-#include "_cdio_stdio.h"
 
 #include <cdio/logging.h>
 #include <cdio/util.h>
@@ -68,10 +62,14 @@
 #include <cdio/utf8.h>
 #include <cdio/version.h>
 
-#include "image.h"
-#include "cdio_assert.h"
-#include "cdio_private.h"
-#include "_cdio_stdio.h"
+#include <driver/image_common.h>
+#include <udf/udf_private.h>
+#include <driver/image.h>
+#include <string.h>
+#include <driver/cdtext_private.h>
+
+#define WIN32_MEAN_AND_LEAN 1
+#include <windows.h>
 
 /* reader */
 
@@ -85,7 +83,7 @@
 #endif
 
 static lsn_t get_disc_last_lsn_bincue(void *p_user_data);
-#include "image_common.h"
+#include <driver/image_common.h>
 static bool parse_cuefile(_img_private_t *cd, const char *toc_name);
 
 /*!

@@ -29,6 +29,8 @@
 #ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
+#include <driver/cdio_assert.h>
+#include <driver/filemode.h>
 
 /*! String inside frame which identifies XA attributes.  Note should
     come *before* public headers which does a #define of
@@ -42,8 +44,6 @@ const char ISO_XA_MARKER_STRING[] = {'C', 'D', '-', 'X', 'A', '0', '0', '1'};
 #include <cdio/bytesex.h>
 
 /* Private headers */
-#include "cdio_assert.h"
-#include "filemode.h"
 
 /** The below variable is trickery to force enum symbol values to be
     recorded in debug symbol tables. It is used to allow one to refer

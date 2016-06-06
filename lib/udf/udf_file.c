@@ -22,13 +22,8 @@
 #include <cdio/bytesex.h>
 #include "udf_fs.h"
 
-#ifdef HAVE_STRING_H
 # include <string.h>
-#endif
 
-#ifdef HAVE_STDIO_H
-#include <stdio.h>  /* Remove when adding cdio/logging.h */
-#endif
 
 /* Useful defines */
 

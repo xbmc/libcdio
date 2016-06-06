@@ -18,19 +18,12 @@
 #ifndef CDIO_UDF_UDF_PRIVATE_H_
 #define CDIO_UDF_UDF_PRIVATE_H_
 
-#if defined(HAVE_CONFIG_H) && !defined(LIBCDIO_CONFIG_H) && !defined(__CDIO_CONFIG_H__)
-# include "config.h"
-# define __CDIO_CONFIG_H__ 1
-#endif
-
-#ifdef HAVE_STDBOOL_H
-# include <stdbool.h>
-#endif 
+#include <stdbool.h>
 
 #include <cdio/types.h>
 #include <cdio/ecma_167.h>
 #include <cdio/udf.h>
-#include "_cdio_stdio.h"
+#include <driver/_cdio_stdio.h>
 
 /* Implementation of opaque types */
 

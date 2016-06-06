@@ -28,7 +28,7 @@
 #endif 
 
 #include <cdio/udf.h>
-#include "filemode.h"
+#include <driver/filemode.h>
 
 
 /* Set the 's' and 't' flags in file attributes string CHARS,

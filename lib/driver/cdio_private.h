@@ -463,6 +463,8 @@ extern "C" {
     lba_t   lba;              /* Current LBA */
   } internal_position_t;
   
+struct _generic_img_private_t;
+typedef struct _generic_img_private_t generic_img_private_t;
   CdIo_t * cdio_new (generic_img_private_t *p_env, cdio_funcs_t *p_funcs);
 
   /* The below structure describes a specific CD Input driver  */
@@ -502,56 +504,8 @@ extern "C" {
   void cdio_add_device_list(char **device_list[], const char *psz_drive,
                             unsigned int *i_drives);
 
-  driver_return_code_t close_tray_bsdi    (const char *psz_drive);
-  driver_return_code_t close_tray_freebsd (const char *psz_drive);
-  driver_return_code_t close_tray_linux   (const char *psz_drive);
-  driver_return_code_t close_tray_netbsd  (const char *psz_drive);
-  driver_return_code_t close_tray_os2     (const char *psz_drive);
-  driver_return_code_t close_tray_osx     (const char *psz_drive);
-  driver_return_code_t close_tray_solaris (const char *psz_drive);
   driver_return_code_t close_tray_win32   (const char *psz_drive);
 
-  bool cdio_have_netbsd(void);
-  CdIo_t * cdio_open_netbsd (const char *psz_source);
-  char * cdio_get_default_device_netbsd(void);
-  char **cdio_get_devices_netbsd(void);
-  /*! Set up CD-ROM for reading using the NetBSD driver. The device_name is
-      the some sort of device name.
-
-     NULL is returned on error or there is no FreeBSD driver.
-
-     @see cdio_open_cd, cdio_open
-   */
-  CdIo_t * cdio_open_am_netbsd (const char *psz_source,
-                                const char *psz_access_mode);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if AIX driver is available. */
-  bool cdio_have_aix    (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if BSDI driver is available. */
-  bool cdio_have_bsdi    (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if FreeBSD driver is available. */
-  bool cdio_have_freebsd (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if GNU/Linux driver is available. */
-  bool cdio_have_linux   (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if Sun Solaris driver is available. */
-  bool cdio_have_solaris (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if IBM OS2 driver is available. */
-  bool cdio_have_os2     (void);
-
-  /*! DEPRICATED: use cdio_have_driver().
-    True if Apple OSX driver is available. */
-  bool cdio_have_osx     (void);
 
   /*! DEPRICATED: use cdio_have_driver().
     True if Microsoft Windows driver is available. */

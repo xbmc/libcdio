@@ -22,7 +22,6 @@
    residing inside a disk file (*.bin) and its associated cue sheet.
    (*.cue).
 */
-#include "portable.h"
 
 #ifdef HAVE_LIMITS_H
 #include <limits.h>
@@ -60,9 +59,6 @@
 #include <cdio/utf8.h>
 #include <cdio/version.h>
 
-#include "image.h"
-#include "cdio_assert.h"
-#include "_cdio_stdio.h"
 
 /* reader */
 
@@ -75,8 +71,12 @@
 #define CDIO_FOPEN fopen
 #endif
 
-#include "image_common.h"
-#include "cdtext_private.h"
+#include <driver/image_common.h>
+#include <cdio/disc.h>
+#include <driver/image.h>
+#include <udf_private.h>
+#include <string.h>
+#include <driver/cdtext_private.h>
 
 static lsn_t get_disc_last_lsn_cdrdao (void *p_user_data);
 static bool parse_tocfile (_img_private_t *cd, const char *p_toc_name);

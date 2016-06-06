@@ -20,15 +20,10 @@
    say opensolaris. */
 #include "udf_private.h"
 #include <cdio/bytesex.h>
-#include "filemode.h"
+#include <driver/filemode.h>
+#include <sys/stat.h>
 
-#ifdef HAVE_STRING_H
 # include <string.h>
-#endif
-
-#ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
-#endif
 
 /** The below variables are trickery to force enum symbol values to be
     recorded in debug symbol tables. They are used to allow one to refer

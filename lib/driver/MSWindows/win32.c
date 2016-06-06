@@ -33,10 +33,11 @@
 #include <cdio/util.h>
 #include <cdio/mmc.h>
 #include <cdio/logging.h>
-#include "cdio_assert.h"
-#include "cdio_private.h" /* protoype for cdio_is_device_win32 */
 
 #include <string.h>
+#include <fcntl.h>
+#include <mmc_private.h>
+#include <driver/cdio_private.h>
 
 #ifdef HAVE_WIN32_CDROM
 
@@ -71,20 +72,6 @@
 #include <sys/types.h>
 #endif
 
-#if defined (_MSC_VER) || defined (_XBOX)
-#undef IN
-#else
-#include "aspi32.h"
-#endif
-
-#ifdef _XBOX
-#include "stdint.h"
-#include <xtl.h>
-#define WIN_NT 1
-#else
-#define WIN_NT               ( GetVersion() < 0x80000000 )
-#endif
-
 /* mingw-w64 defines this to lseek64 when LFS is enabled */
 #ifdef lseek
 # undef lseek
@@ -100,11 +87,7 @@ static driver_return_code_t
 audio_get_volume_win32 ( void *p_user_data,
 			 /*out*/ cdio_audio_volume_t *p_volume)
 {
-  if ( WIN_NT ) {
-    return audio_get_volume_win32ioctl (p_user_data, p_volume);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
+	return audio_get_volume_win32ioctl (p_user_data, p_volume);
 }
 
 /*!
@@ -115,11 +98,7 @@ audio_get_volume_win32 ( void *p_user_data,
 static driver_return_code_t
 audio_pause_win32 (void *p_user_data)
 {
-  if ( WIN_NT ) {
-    return audio_pause_win32ioctl (p_user_data);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
+	return audio_pause_win32ioctl (p_user_data);
 }
 
 /*!
@@ -130,11 +109,7 @@ audio_pause_win32 (void *p_user_data)
 static driver_return_code_t
 audio_play_msf_win32 (void *p_user_data, msf_t *p_start_msf, msf_t *p_end_msf)
 {
-  if ( WIN_NT ) {
     return audio_play_msf_win32ioctl (p_user_data, p_start_msf, p_end_msf);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
 }
 
 /*!
@@ -147,11 +122,7 @@ static driver_return_code_t
 audio_read_subchannel_win32 (void *p_user_data,
 			     cdio_subchannel_t *p_subchannel)
 {
-  if ( WIN_NT ) {
     return audio_read_subchannel_win32ioctl (p_user_data, p_subchannel);
-  } else {
-    return audio_read_subchannel_mmc(p_user_data, p_subchannel);
-  }
 }
 
   /*!
@@ -163,11 +134,7 @@ audio_read_subchannel_win32 (void *p_user_data,
 static driver_return_code_t
 audio_resume_win32 (void *p_user_data)
 {
-  if ( WIN_NT ) {
     return audio_resume_win32ioctl (p_user_data);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
 }
 
 /*!
@@ -179,30 +146,19 @@ audio_resume_win32 (void *p_user_data)
 static driver_return_code_t
 audio_set_volume_win32 ( void *p_user_data, cdio_audio_volume_t *p_volume)
 {
-  if ( WIN_NT ) {
     return audio_set_volume_win32ioctl (p_user_data, p_volume);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
 }
 
 static driver_return_code_t
 audio_stop_win32 ( void *p_user_data)
 {
-  if ( WIN_NT ) {
     return audio_stop_win32ioctl (p_user_data);
-  } else {
-    return DRIVER_OP_UNSUPPORTED; /* not yet, but soon I hope */
-  }
 }
 
 /* General ioctl() CD-ROM command function */
 static bool
 _cdio_mciSendCommand(int id, UINT msg, DWORD flags, void *arg)
 {
-#ifdef _XBOX
-  return false;
-#else
   MCIERROR mci_error;
 
   mci_error = mciSendCommand(id, msg, flags, (DWORD_PTR)arg);
@@ -213,27 +169,20 @@ _cdio_mciSendCommand(int id, UINT msg, DWORD flags, void *arg)
     cdio_warn("mciSendCommand() error: %s", error);
   }
   return(mci_error == 0);
-#endif
 }
 
 static access_mode_t
 str_to_access_mode_win32(const char *psz_access_mode)
 {
   const access_mode_t default_access_mode =
-    WIN_NT ? _AM_IOCTL : _AM_ASPI;
+    _AM_IOCTL;
 
   if (NULL==psz_access_mode) return default_access_mode;
 
   if (!strcmp(psz_access_mode, "ioctl"))
     return _AM_IOCTL;
   else if (!strcmp(psz_access_mode, "ASPI")) {
-#ifdef _XBOX
-    cdio_warn ("XBOX doesn't support access type: %s. Default used instead.",
-	       psz_access_mode);
-    return default_access_mode;
-#else
     return _AM_ASPI;
-#endif
   } else if (!strcmp(psz_access_mode, "MMC_RDWR")) {
     return _AM_MMC_RDWR;
   } else if (!strcmp(psz_access_mode, "MMC_RDWR_EXCL")) {
@@ -250,30 +199,18 @@ get_discmode_win32(void *p_user_data)
 {
   _img_private_t *p_env = p_user_data;
 
-  if (p_env->hASPI) {
-    return get_discmode_aspi (p_env);
-  } else {
-    return get_discmode_win32ioctl (p_env);
-  }
+  return get_discmode_win32ioctl (p_env);
 }
 
 static driver_return_code_t
 get_last_session_win32(void *p_user_data,
                        /*out*/ lsn_t *i_last_session) {
-  if ( WIN_NT ) {
     return get_last_session_win32ioctl(p_user_data, i_last_session);
-  } else {
-    return DRIVER_OP_UNSUPPORTED;
-  }
 }
 
 static const char *
 is_cdrom_win32(const char drive_letter) {
-  if ( WIN_NT ) {
     return is_cdrom_win32ioctl (drive_letter);
-  } else {
-    return is_cdrom_aspi(drive_letter);
-  }
 }
 
 /*!
@@ -299,13 +236,8 @@ run_mmc_cmd_win32( void *p_user_data, unsigned int i_timeout_ms,
 {
   _img_private_t *p_env = p_user_data;
 
-  if (p_env->hASPI) {
-    return run_mmc_cmd_aspi( p_env, i_timeout_ms, i_cdb, p_cdb,
-			     e_direction, i_buf, p_buf );
-  } else {
-    return run_mmc_cmd_win32ioctl( p_env, i_timeout_ms, i_cdb, p_cdb,
-				   e_direction, i_buf, p_buf );
-  }
+  return run_mmc_cmd_win32ioctl( p_env, i_timeout_ms, i_cdb, p_cdb,
+         e_direction, i_buf, p_buf );
 }
 
 /*!
@@ -340,9 +272,6 @@ init_win32 (void *p_user_data)
   case _AM_MMC_RDWR:
   case _AM_MMC_RDWR_EXCL:
     b_ret = init_win32ioctl(p_env);
-    break;
-  case _AM_ASPI:
-    b_ret = init_aspi(p_env);
     break;
   default:
     return 0;
@@ -387,16 +316,8 @@ read_audio_sectors (void *p_user_data, void *p_buf, lsn_t i_lsn,
 		    unsigned int i_blocks)
 {
   _img_private_t *p_env = p_user_data;
-  if ( p_env->hASPI ) {
-    return read_audio_sectors_aspi( p_env, p_buf, i_lsn, i_blocks );
-  } else {
-#if 0
-    return read_audio_sectors_win32ioctl( p_env, p_buf, i_lsn, i_blocks );
-#else
-    return mmc_read_sectors( p_env->gen.cdio, p_buf, i_lsn,
-                                  CDIO_MMC_READ_TYPE_CDDA, i_blocks);
-#endif
-  }
+  return mmc_read_sectors( p_env->gen.cdio, p_buf, i_lsn,
+                                CDIO_MMC_READ_TYPE_CDDA, i_blocks);
 }
 
 /*!
@@ -441,11 +362,7 @@ read_mode1_sector_win32 (void *p_user_data, void *p_buf, lsn_t lsn,
 
   p_env->gen.ioctls_debugged++;
 
-  if ( p_env->hASPI ) {
-    return read_mode1_sector_aspi( p_env, p_buf, lsn, b_form2 );
-  } else {
-    return read_mode1_sector_win32ioctl( p_env, p_buf, lsn, b_form2 );
-  }
+  return read_mode1_sector_win32ioctl( p_env, p_buf, lsn, b_form2 );
 }
 
 /*!
@@ -504,18 +421,7 @@ read_mode2_sector_win32 (void *p_user_data, void *data, lsn_t lsn,
 
   p_env->gen.ioctls_debugged++;
 
-  if ( p_env->hASPI ) {
-    int ret;
-    ret = read_mode2_sector_aspi(p_user_data, buf, lsn, 1);
-    if( ret != 0 ) return ret;
-    if (b_form2)
-      memcpy (data, buf, M2RAW_SECTOR_SIZE);
-    else
-      memcpy (((char *)data), buf + CDIO_CD_SUBHEADER_SIZE, CDIO_CD_FRAMESIZE);
-    return 0;
-  } else {
-    return read_mode2_sector_win32ioctl( p_env, data, lsn, b_form2 );
-  }
+  return read_mode2_sector_win32ioctl( p_env, data, lsn, b_form2 );
 }
 
 /*!
@@ -571,13 +477,9 @@ set_arg_win32 (void *p_user_data, const char key[], const char value[])
   else if (!strcmp (key, "access-mode"))
     {
       p_env->access_mode = str_to_access_mode_win32(value);
-      if (p_env->access_mode == _AM_ASPI && !p_env->b_aspi_init)
-	return init_aspi(p_env) ? 1 : -3;
-      else if (p_env->access_mode == _AM_IOCTL && !p_env->b_ioctl_init)
-	return init_win32ioctl(p_env) ? 1 : -3;
-      else
-	return -4;
-      return 0;
+      if (p_env->access_mode == _AM_IOCTL && !p_env->b_ioctl_init)
+        return init_win32ioctl(p_env) ? 1 : -3;
+      return -4;
     }
   else
     return -1;
@@ -594,11 +496,7 @@ read_toc_win32 (void *p_user_data)
 {
   _img_private_t *p_env = p_user_data;
   bool ret;
-  if( p_env->hASPI ) {
-    ret = read_toc_aspi( p_env );
-  } else {
-    ret = read_toc_win32ioctl( p_env );
-  }
+  ret = read_toc_win32ioctl( p_env );
   if (ret) p_env->gen.toc_init = true ;
   return ret;
 }
@@ -609,9 +507,6 @@ read_toc_win32 (void *p_user_data)
 static driver_return_code_t
 open_close_media_win32 (const char *psz_win32_drive, DWORD command_flags)
 {
-#ifdef _XBOX
-  return DRIVER_OP_UNSUPPORTED;
-#else
   MCI_OPEN_PARMS op;
   DWORD i_flags;
   int ret;
@@ -668,7 +563,6 @@ is_mmc_supported(void *user_data)
       case _AM_NONE:
 	return false;
       case _AM_IOCTL:
-      case _AM_ASPI:
       case _AM_MMC_RDWR:
       case _AM_MMC_RDWR_EXCL:
 	return true;
@@ -761,11 +655,7 @@ _cdio_get_track_format(void *p_obj, track_t i_track)
        || i_track >= p_env->gen.i_tracks + p_env->gen.i_first_track )
     return TRACK_FORMAT_ERROR;
 
-  if( p_env->hASPI ) {
-    return get_track_format_aspi(p_env, i_track);
-  } else {
-    return get_track_format_win32ioctl(p_env, i_track);
-  }
+  return get_track_format_win32ioctl(p_env, i_track);
 }
 
 /*!
@@ -828,7 +718,6 @@ _cdio_get_track_msf(void *p_user_data, track_t i_tracks, msf_t *p_msf)
   }
 }
 
-#endif /* HAVE_WIN32_CDROM */
 
 /*!
   Return an array of strings giving possible CD devices.
@@ -913,8 +802,6 @@ cdio_is_device_win32(const char *source_name)
 	    && (source_name[len-1] == ':'))
     return true;
 
-  if ( ! WIN_NT ) return false;
-
   /* Test to see if of form: \\.\x: */
   return ( (len == 6)
 	   && source_name[0] == '\\' && source_name[1] == '\\'
@@ -952,15 +839,7 @@ close_tray_win32 (const char *psz_win32_drive)
 CdIo_t *
 cdio_open_win32 (const char *psz_source_name)
 {
-#ifdef HAVE_WIN32_CDROM
-  if ( WIN_NT ) {
-    return cdio_open_am_win32(psz_source_name, "ioctl");
-  } else {
-    return cdio_open_am_win32(psz_source_name, "ASPI");
-  }
-#else
-  return NULL;
-#endif /* HAVE_WIN32_CDROM */
+  return cdio_open_am_win32(psz_source_name, "ioctl");
 }
 
 /*!

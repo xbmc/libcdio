@@ -37,13 +37,13 @@
 
 #if !defined(HAVE_SNPRINTF)
 # if defined (_MSC_VER)
-#  define snprintf _snprintf
+//#  define snprintf _snprintf
 # endif
 #endif /*HAVE_SNPRINTF*/
 
 #if !defined(HAVE_VSNPRINTF)
 # if defined (_MSC_VER)
-#  define vsnprintf _vsnprintf
+//#  define vsnprintf _vsnprintf
 # endif
 #endif /*HAVE_SNPRINTF*/
 

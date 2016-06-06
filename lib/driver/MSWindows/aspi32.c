@@ -31,9 +31,11 @@
 #include <cdio/util.h>
 #include <cdio/mmc.h>
 #include <cdio/logging.h>
-#include "cdio_assert.h"
+#include <driver/cdio_assert.h>
+#include <driver/mmc/mmc_private.h>
 
 #include <string.h>
+#include <driver/image.h>
 
 #ifdef HAVE_WIN32_CDROM
 
@@ -41,7 +43,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 #include <windows.h>

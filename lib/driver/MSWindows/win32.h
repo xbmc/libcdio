@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "cdio_private.h"
+#include <driver/generic.h>
 
 #pragma pack()
 

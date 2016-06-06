@@ -26,11 +26,6 @@
 
 #ifdef HAVE_WIN32_CDROM
 
-#if defined (_XBOX)
-# include "inttypes.h"
-# include "NtScsi.h"
-# include "undocumented.h"
-#else
 # if defined (__MINGW64_VERSION_MAJOR)
 #  define _NTSRB_ /* Bad things happen if srb.h gets included */
 # endif
@@ -50,7 +45,6 @@
 # ifdef HAVE_DDK_NTDDSCSI_H
 #  include <ddk/ntddscsi.h>
 # endif
-#endif
 
 #if defined (_WIN32)
 #include <windows.h>
@@ -64,7 +58,7 @@
 #include <cdio/cdio.h>
 #include <cdio/sector.h>
 #include <cdio/util.h>
-#include "cdio_assert.h"
+#include <driver/cdio_assert.h>
 #include <cdio/mmc.h>
 #include "cdio/logging.h"
 
@@ -83,10 +77,10 @@
                         error_msg, sizeof(error_msg), NULL);            \
   (count != 0) ?                                                        \
     cdio_log(loglevel, "Error: file %s: line %d (%s)\n\t%s\n",          \
-             __FILE__, __LINE__, __PRETTY_FUNCTION__, error_msg)        \
+             __FILE__, __LINE__, __FUNCTION__, error_msg)        \
     :                                                                   \
     cdio_log(loglevel, "Error: file %s: line %d (%s) %ld\n",            \
-             __FILE__, __LINE__, __PRETTY_FUNCTION__, i_err);           \
+             __FILE__, __LINE__, __FUNCTION__, i_err);           \
 }
 #endif
 

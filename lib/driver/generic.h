@@ -29,6 +29,7 @@
 #include <cdio/cdio.h>
 #include <cdio/cdtext.h>
 #include <cdio/iso9660.h>
+#include <driver/cdio_private.h>
 
 #ifdef HAVE_STDBOOL_H
 # include <stdbool.h>
@@ -44,7 +45,7 @@ extern "C" {
     we facilitate writing generic routines and even cut-and-paste
     code.
    */
-  typedef struct {
+  typedef struct _generic_img_private_t {
     char *source_name;      /**< Name used in open. */
     bool  init;             /**< True if structure has been initialized */
     bool  toc_init;         /**< True if TOC read in */

@@ -43,21 +43,13 @@
 
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+# include <config.h>
 # define __CDIO_CONFIG_H__ 1
 #endif
 
-#ifdef HAVE_STDIO_H
 #include <stdio.h>
-#endif
-
-#ifdef HAVE_STRING_H
-# include <string.h>
-#endif
-
-#ifdef HAVE_STDLIB_H
-# include <stdlib.h>
-#endif
+#include <string.h>
+#include <stdlib.h>
 
 /* These definitions are also to make debugging easy. Note that they
    have to come *before* #include <cdio/ecma_167.h> which sets
@@ -76,7 +68,7 @@ const char VSD_STD_ID_TEA01[] = {'T', 'E', 'A', '0', '1'};
 
 #include "udf_private.h"
 #include "udf_fs.h"
-#include "cdio_assert.h"
+#include <driver/cdio_assert.h>
 
 /*
  * The UDF specs are pretty clear on how each data structure is made

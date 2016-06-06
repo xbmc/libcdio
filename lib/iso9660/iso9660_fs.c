@@ -49,9 +49,9 @@
 #include <cdio/utf8.h>
 
 /* Private headers */
-#include "cdio_assert.h"
-#include "_cdio_stdio.h"
-#include "cdio_private.h"
+#include <driver/cdio_private.h>
+#include <udf/udf_private.h>
+#include <driver/cdio_assert.h>
 
 /** Implementation of iso9660_t type */
 struct _iso9660_s {

@@ -27,6 +27,9 @@
 #ifndef CDIO_DRIVER_IMAGE_COMMON_H_
 #define CDIO_DRIVER_IMAGE_COMMON_H_
 
+#include <driver/generic.h>
+#include <driver/image.h>
+
 typedef struct {
   /* Things common to all drivers like this. 
      This must be first. */

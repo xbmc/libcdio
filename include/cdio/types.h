@@ -55,7 +55,9 @@ typedef uint8_t ubyte;
    unistd.h that defines them. Such a file is provided with
    the libcdio source, in the MSVC/missing directory */
 #if defined(_MSC_VER)
-#include <unistd.h>
+//#include <unistd.h>
+typedef int64_t ssize_t;
+typedef uint32_t mode_t;
 #endif
 
   /* default HP/UX macros are broken */

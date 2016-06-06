@@ -21,11 +21,11 @@
     Note should come *before* #include <cdio/iso9660.h> which does
     a #define of this name.
 */
+#include <driver/cdio_assert.h>
 const char ISO_STANDARD_ID[] = {'C', 'D', '0', '0', '1'};
 
 /* Private headers */
 #include "iso9660_private.h"
-#include "cdio_assert.h"
 
 /* Public headers */
 #include <cdio/bytesex.h>
