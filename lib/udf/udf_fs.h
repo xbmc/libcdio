@@ -23,7 +23,7 @@
  * Check the descriptor tag for both the correct id and correct checksum.
  * Return zero if all is good, -1 if not.
  */
-int udf_checktag(const udf_tag_t *p_tag, udf_Uint16_t tag_id);
+CDIO_EXTERN int udf_checktag(const udf_tag_t *p_tag, udf_Uint16_t tag_id);
 
 #endif /* CDIO_UDF_UDF_FS_H_ */
 

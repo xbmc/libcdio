@@ -61,7 +61,7 @@ const char *discmode2str[] = {
   or CD-TEXT information does not exist.
 */
 cdtext_t *
-cdio_get_cdtext (CdIo *obj)
+cdio_get_cdtext (CdIo_t *obj)
 {
   if (obj == NULL) return NULL;
   
@@ -81,7 +81,7 @@ cdio_get_cdtext (CdIo *obj)
   must be freed with cdio_free() when done with it and not NULL.
 */
 uint8_t *
-cdio_get_cdtext_raw (CdIo *obj)
+cdio_get_cdtext_raw (CdIo_t *obj)
 {
   if (obj == NULL) return NULL;
 

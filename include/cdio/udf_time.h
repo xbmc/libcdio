@@ -41,41 +41,41 @@ extern "C" {
   /*!
     Return the access time of the file.
   */
-  time_t udf_get_access_time(const udf_dirent_t *p_udf_dirent);
+  CDIO_EXTERN time_t udf_get_access_time(const udf_dirent_t *p_udf_dirent);
 
   /*!
     Return the attribute (most recent create or access) time of the file
   */
-  time_t udf_get_attribute_time(const udf_dirent_t *p_udf_dirent);
+  CDIO_EXTERN time_t udf_get_attribute_time(const udf_dirent_t *p_udf_dirent);
 
   /*!
     Return the modification time of the file.
   */
-  time_t udf_get_modification_time(const udf_dirent_t *p_udf_dirent);
+  CDIO_EXTERN time_t udf_get_modification_time(const udf_dirent_t *p_udf_dirent);
 
   /*!
     Return the access timestamp of the file
   */
-  udf_timestamp_t *udf_get_access_timestamp(const udf_dirent_t *p_udf_dirent);
+  CDIO_EXTERN udf_timestamp_t *udf_get_access_timestamp(const udf_dirent_t *p_udf_dirent);
 
   /*!
     Return the modification timestamp of the file
   */
-  udf_timestamp_t *udf_get_modification_timestamp(const udf_dirent_t 
+  CDIO_EXTERN udf_timestamp_t *udf_get_modification_timestamp(const udf_dirent_t 
 						  *p_udf_dirent);
 
   /*!
     Return the attr timestamp of the file
   */
-  udf_timestamp_t *udf_get_attr_timestamp(const udf_dirent_t *p_udf_dirent);
+  CDIO_EXTERN udf_timestamp_t *udf_get_attr_timestamp(const udf_dirent_t *p_udf_dirent);
 
   /*!
     Convert a UDF timestamp to a time_t. If microseconds are desired,
     use dest_usec. The return value is the same as dest. */
-  time_t *udf_stamp_to_time(time_t *dest, long int *dest_usec, 
+  CDIO_EXTERN time_t *udf_stamp_to_time(time_t *dest, long int *dest_usec, 
 			  const udf_timestamp_t src);
 
-  udf_timestamp_t *udf_timespec_to_stamp(const struct timespec ts,
+  CDIO_EXTERN udf_timestamp_t *udf_timespec_to_stamp(const struct timespec ts,
 					 udf_timestamp_t *dest);
 
 #ifdef __cplusplus

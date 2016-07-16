@@ -553,9 +553,9 @@ iso9660_strncpy_pad(char dst[], const char src[], size_t len,
 bool
 iso9660_is_dchar (int c)
 {
-  if (!IN (c, 0x30, 0x5f)
-      || IN (c, 0x3a, 0x40)
-      || IN (c, 0x5b, 0x5e))
+  if (!BETWEEN (c, 0x30, 0x5f)
+      || BETWEEN (c, 0x3a, 0x40)
+      || BETWEEN (c, 0x5b, 0x5e))
     return false;
 
   return true;
@@ -570,10 +570,10 @@ iso9660_is_dchar (int c)
 bool
 iso9660_is_achar (int c)
 {
-  if (!IN (c, 0x20, 0x5f)
-      || IN (c, 0x23, 0x24)
+  if (!BETWEEN (c, 0x20, 0x5f)
+      || BETWEEN (c, 0x23, 0x24)
       || c == 0x40
-      || IN (c, 0x5b, 0x5e))
+      || BETWEEN (c, 0x5b, 0x5e))
     return false;
 
   return true;

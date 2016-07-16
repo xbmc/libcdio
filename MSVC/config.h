@@ -145,6 +145,8 @@
 /* Define 1 if you have MinGW CD-ROM support */
 #define HAVE_WIN32_CDROM 1
 
+#define HAVE_STDARG_H 1
+
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST 
 

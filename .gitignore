@@ -43,3 +43,4 @@ MSVC/Release
 MSVC/*.db
 MSVC/*.opendb
 MSVC/*.user
+build/

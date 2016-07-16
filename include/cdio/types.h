@@ -46,6 +46,7 @@ typedef u_int64_t uint64_t;
    For MSVC, you can find both a public domain stdint.h and
    inttypes.h in the MSVC/missing directory of libcdio. */
 #include <stdint.h>
+#include <stdbool.h>
 #endif
 
 typedef uint8_t ubyte;
@@ -54,7 +55,7 @@ typedef uint8_t ubyte;
    to compensate for missing UNIX types is to include a custom
    unistd.h that defines them. Such a file is provided with
    the libcdio source, in the MSVC/missing directory */
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && defined(BUILDING_CDIO)
 //#include <unistd.h>
 typedef int64_t ssize_t;
 typedef uint32_t mode_t;

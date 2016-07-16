@@ -170,14 +170,6 @@ CdIo_driver_t CdIo_driver[sizeof(CdIo_all_drivers)/sizeof(CdIo_all_drivers[0])-1
   {0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL} };
 
 const driver_id_t cdio_drivers[] = {
-  DRIVER_AIX,
-  DRIVER_BSDI,
-  DRIVER_FREEBSD,
-  DRIVER_NETBSD,
-  DRIVER_LINUX,
-  DRIVER_SOLARIS,
-  DRIVER_OS2,
-  DRIVER_OSX,
   DRIVER_WIN32,
   DRIVER_CDRDAO,
   DRIVER_BINCUE,
@@ -186,14 +178,6 @@ const driver_id_t cdio_drivers[] = {
 };
 
 const driver_id_t cdio_device_drivers[] = {
-  DRIVER_AIX,
-  DRIVER_BSDI,
-  DRIVER_FREEBSD,
-  DRIVER_NETBSD,
-  DRIVER_LINUX,
-  DRIVER_SOLARIS,
-  DRIVER_OS2,
-  DRIVER_OSX,
   DRIVER_WIN32,
   DRIVER_UNKNOWN
 };
@@ -890,15 +874,7 @@ cdio_open_am (const char *psz_orig_source, driver_id_t driver_id,
       return ret;
     }
     break;
-  case DRIVER_AIX:
-  case DRIVER_BSDI:
-  case DRIVER_FREEBSD:
-  case DRIVER_LINUX:
-  case DRIVER_NETBSD:
-  case DRIVER_SOLARIS:
   case DRIVER_WIN32:
-  case DRIVER_OSX:
-  case DRIVER_OS2:
   case DRIVER_NRG:
   case DRIVER_BINCUE:
   case DRIVER_CDRDAO:

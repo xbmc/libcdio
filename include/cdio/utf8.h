@@ -22,6 +22,7 @@
 
 
 #include <cdio/types.h>
+#include "cdio.h"
 
 /** \brief Opaque characterset converter
  */
@@ -34,7 +35,7 @@ typedef struct cdio_charset_coverter_s cdio_charset_coverter_t;
  *  \returns A newly allocated charset converter
  */
 
-cdio_charset_coverter_t *
+CDIO_EXTERN cdio_charset_coverter_t *
 cdio_charset_converter_create(const char * src_charset,
                               const char * dst_charset);
 
@@ -42,7 +43,7 @@ cdio_charset_converter_create(const char * src_charset,
  *  \param cnv A characterset converter
  */
 
-void cdio_charset_converter_destroy(cdio_charset_coverter_t*cnv);
+CDIO_EXTERN void cdio_charset_converter_destroy(cdio_charset_coverter_t*cnv);
 
 /** \brief Convert a string from one character set to another
  *  \param cnv A charset converter
@@ -56,7 +57,7 @@ void cdio_charset_converter_destroy(cdio_charset_coverter_t*cnv);
  *  If you pass -1 for src_len, strlen() will be used.
  */
 
-bool cdio_charset_convert(cdio_charset_coverter_t*cnv,
+CDIO_EXTERN bool cdio_charset_convert(cdio_charset_coverter_t*cnv,
                           char * src, int src_len,
                           char ** dst, int * dst_len);
 
@@ -74,7 +75,7 @@ bool cdio_charset_convert(cdio_charset_coverter_t*cnv,
  */
 
 
-bool cdio_charset_from_utf8(cdio_utf8_t * src, char ** dst,
+CDIO_EXTERN bool cdio_charset_from_utf8(cdio_utf8_t * src, char ** dst,
                             int * dst_len, const char * dst_charset);
 
 /** \brief Convert a string from another charset to UTF-8 
@@ -92,7 +93,7 @@ bool cdio_charset_from_utf8(cdio_utf8_t * src, char ** dst,
  */
 
 
-bool cdio_charset_to_utf8(const char *src, size_t src_len, cdio_utf8_t **dst,
+CDIO_EXTERN bool cdio_charset_to_utf8(const char *src, size_t src_len, cdio_utf8_t **dst,
                           const char * src_charset);
 
 #ifdef _WIN32
@@ -102,11 +103,11 @@ bool cdio_charset_to_utf8(const char *src, size_t src_len, cdio_utf8_t **dst,
  *  returned string with cdio_free().
  *  This is a convenience function available on Windows platforms only.
  */
-wchar_t* cdio_utf8_to_wchar(const char* str);
+CDIO_EXTERN wchar_t* cdio_utf8_to_wchar(const char* str);
 
 #include <stdio.h> /* for FILE */
 /** \brief Provides an UTF-8 compliant version of fopen for Windows
  *  The parameters and return value are the same as fopen().
  */
-FILE* fopen_utf8(const char* filename, const char* mode);
+CDIO_EXTERN FILE* fopen_utf8(const char* filename, const char* mode);
 #endif

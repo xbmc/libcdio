@@ -176,7 +176,7 @@ const char
     return "BLANK";
 
   case CDIO_MMC_GPCMD_SECURITY_PROTOCOL_IN:
-    return "SECURITY PROTOCOL IN";
+    return "SECURITY PROTOCOL BETWEEN";
 
   case CDIO_MMC_GPCMD_SEND_KEY:
     return "SEND KEY";

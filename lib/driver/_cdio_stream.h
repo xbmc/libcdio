@@ -64,10 +64,10 @@ extern "C" {
      @return unpon successful completion, return value is positive, else,
      the global variable errno is set to indicate the error.
   */
-  off_t cdio_stream_getpos(CdioDataSource_t* p_obj, 
+  CDIO_EXTERN off_t cdio_stream_getpos(CdioDataSource_t* p_obj, 
                              /*out*/ off_t *i_offset);
   
-  CdioDataSource_t *
+  CDIO_EXTERN CdioDataSource_t *
   cdio_stream_new(void *user_data, const cdio_stream_io_functions *funcs);
 
   /**
@@ -87,7 +87,7 @@ extern "C" {
      We do not distinguish between end-of-file and error, and callers
      must use feof(3) and ferror(3) to determine which occurred.
   */
-  ssize_t cdio_stream_read(CdioDataSource_t* p_obj, void *ptr, size_t i_size, 
+  CDIO_EXTERN ssize_t cdio_stream_read(CdioDataSource_t* p_obj, void *ptr, size_t i_size, 
                            size_t nmemb);
   
   /** 
@@ -106,21 +106,21 @@ extern "C" {
     DRIVER_OP_ERROR is returned and the global variable errno is set to
     indicate the error.
    */
-  int cdio_stream_seek(CdioDataSource_t *p_obj, off_t i_offset, 
+  CDIO_EXTERN int cdio_stream_seek(CdioDataSource_t *p_obj, off_t i_offset, 
                            int whence);
   
   /**
     Return whatever size of stream reports, I guess unit size is bytes. 
     On error return -1;
   */
-  off_t cdio_stream_stat(CdioDataSource_t *p_obj);
+  CDIO_EXTERN off_t cdio_stream_stat(CdioDataSource_t *p_obj);
   
   /**
     Deallocate resources associated with p_obj. After this p_obj is unusable.
   */
-  void cdio_stream_destroy(CdioDataSource_t *p_obj);
+  CDIO_EXTERN void cdio_stream_destroy(CdioDataSource_t *p_obj);
   
-  void cdio_stream_close(CdioDataSource_t *p_obj);
+  CDIO_EXTERN void cdio_stream_close(CdioDataSource_t *p_obj);
   
 #ifdef __cplusplus
 }

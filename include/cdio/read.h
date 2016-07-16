@@ -50,7 +50,7 @@ extern "C" {
     @return (off_t) -1 on error. 
   */
 
-  off_t cdio_lseek(const CdIo_t *p_cdio, off_t offset, int whence);
+  CDIO_EXTERN off_t cdio_lseek(const CdIo_t *p_cdio, off_t offset, int whence);
     
   /*!  Reads into buf the next size bytes.  Similar to (if not the
     same as) libc's read(). This is a "cooked" read, or one handled by
@@ -64,7 +64,7 @@ extern "C" {
 
     @return (ssize_t) -1 on error. 
   */
-  ssize_t cdio_read(const CdIo_t *p_cdio, void *p_buf, size_t i_size);
+  CDIO_EXTERN ssize_t cdio_read(const CdIo_t *p_cdio, void *p_buf, size_t i_size);
     
   /*!
     Read an audio sector
@@ -75,7 +75,7 @@ extern "C" {
                  bytes.
     @param i_lsn sector to read
   */
-  driver_return_code_t cdio_read_audio_sector (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_audio_sector (const CdIo_t *p_cdio, 
                                                void *p_buf, lsn_t i_lsn);
 
   /*!
@@ -88,7 +88,7 @@ extern "C" {
     @param i_lsn sector to read
     @param i_blocks number of sectors to read
   */
-  driver_return_code_t cdio_read_audio_sectors (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_audio_sectors (const CdIo_t *p_cdio, 
                                                 void *p_buf, lsn_t i_lsn,
                                                 uint32_t i_blocks);
 
@@ -109,7 +109,7 @@ extern "C" {
 
     @param i_blocks number of blocks to read
   */
-  driver_return_code_t cdio_read_data_sectors ( const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_data_sectors ( const CdIo_t *p_cdio, 
                                                 void *p_buf, lsn_t i_lsn,
                                                 uint16_t i_blocksize,
                                                 uint32_t i_blocks );
@@ -122,7 +122,7 @@ extern "C" {
     @param b_form2 true for reading mode 1 form 2 sectors or false for 
     mode 1 form 1 sectors.
   */
-  driver_return_code_t cdio_read_mode1_sector (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_mode1_sector (const CdIo_t *p_cdio, 
                                                void *p_buf, lsn_t i_lsn, 
                                                bool b_form2);
   /*!
@@ -135,7 +135,7 @@ extern "C" {
     mode 1 form 1 sectors.
     @param i_blocks number of sectors to read
   */
-  driver_return_code_t cdio_read_mode1_sectors (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_mode1_sectors (const CdIo_t *p_cdio, 
                                                 void *p_buf, lsn_t i_lsn, 
                                                 bool b_form2, 
                                                 uint32_t i_blocks);
@@ -153,14 +153,14 @@ extern "C" {
 
     @return 0 if no error, nonzero otherwise.
   */
-  driver_return_code_t cdio_read_mode2_sector (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_mode2_sector (const CdIo_t *p_cdio, 
                                                void *p_buf, lsn_t i_lsn, 
                                                bool b_form2);
   
   /** The special case of reading a single block is a common one so we
       provide a routine for that as a convenience.
   */
-  driver_return_code_t cdio_read_sector(const CdIo_t *p_cdio, void *p_buf, 
+  CDIO_EXTERN driver_return_code_t cdio_read_sector(const CdIo_t *p_cdio, void *p_buf, 
                                         lsn_t i_lsn, 
                                         cdio_read_mode_t read_mode);
   /*!
@@ -178,7 +178,7 @@ extern "C" {
 
     @return 0 if no error, nonzero otherwise.
   */
-  driver_return_code_t cdio_read_mode2_sectors (const CdIo_t *p_cdio, 
+  CDIO_EXTERN driver_return_code_t cdio_read_mode2_sectors (const CdIo_t *p_cdio, 
                                                 void *p_buf, lsn_t i_lsn, 
                                                 bool b_form2, 
                                                 uint32_t i_blocks);
@@ -212,7 +212,7 @@ extern "C" {
     *p_buf should hold at least CDIO_CD_FRAMESIZE * i_blocks bytes.
     
   */
-  driver_return_code_t cdio_read_sectors(const CdIo_t *p_cdio, void *p_buf, 
+  CDIO_EXTERN driver_return_code_t cdio_read_sectors(const CdIo_t *p_cdio, void *p_buf, 
                                          lsn_t i_lsn, 
                                          cdio_read_mode_t read_mode,
                                          uint32_t i_blocks);

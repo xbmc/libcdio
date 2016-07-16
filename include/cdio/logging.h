@@ -25,6 +25,7 @@
 #define CDIO_LOGGING_H_
 
 #include <cdio/types.h>
+#include "cdio.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,7 +48,7 @@ typedef enum {
  * is desired. This is used by the internal default log handler, but
  * it could be use by applications which provide their own log handler.
  */
-extern cdio_log_level_t cdio_loglevel_default;
+CDIO_EXTERN cdio_log_level_t cdio_loglevel_default;
 
 /**
  * This type defines the signature of a log handler.  For every
@@ -69,7 +70,7 @@ typedef void (*cdio_log_handler_t) (cdio_log_level_t level,
  * @param level   The log level.
  * @param message The log message.
  */
-extern void cdio_default_log_handler(cdio_log_level_t level, const char message[]);
+CDIO_EXTERN extern void cdio_default_log_handler(cdio_log_level_t level, const char message[]);
 
 /**
  * Set a custom log handler for libcdio.  The return value is the log
@@ -81,7 +82,7 @@ extern void cdio_default_log_handler(cdio_log_level_t level, const char message[
  * @param new_handler The new log handler.
  * @return The previous log handler.
  */
-cdio_log_handler_t cdio_log_set_handler (cdio_log_handler_t new_handler);
+CDIO_EXTERN cdio_log_handler_t cdio_log_set_handler (cdio_log_handler_t new_handler);
 
 /**
  * Handle an message with the given log level.
@@ -95,7 +96,7 @@ cdio_log_handler_t cdio_log_set_handler (cdio_log_handler_t new_handler);
  * @param format  printf-style format string
  * @param ...     remaining arguments needed by format string
  */
-void cdio_log (cdio_log_level_t level,
+CDIO_EXTERN void cdio_log (cdio_log_level_t level,
                const char format[], ...) GNUC_PRINTF(2, 3);
 
 /**
@@ -103,28 +104,28 @@ void cdio_log (cdio_log_level_t level,
  *
  * @see cdio_log for a more generic routine
  */
-void cdio_debug (const char format[], ...) GNUC_PRINTF(1,2);
+CDIO_EXTERN void cdio_debug (const char format[], ...) GNUC_PRINTF(1,2);
 
 /**
  * Handle an informative message.
  *
  * @see cdio_log for a more generic routine
  */
-void cdio_info (const char format[], ...) GNUC_PRINTF(1,2);
+CDIO_EXTERN void cdio_info (const char format[], ...) GNUC_PRINTF(1,2);
 
 /**
  * Handle a warning message.
  *
  * @see cdio_log for a more generic routine
  */
-void cdio_warn (const char format[], ...) GNUC_PRINTF(1,2);
+CDIO_EXTERN void cdio_warn (const char format[], ...) GNUC_PRINTF(1,2);
 
 /**
  * Handle an error message. Execution is terminated.
  *
  * @see cdio_log for a more generic routine.
  */
-void cdio_error (const char format[], ...) GNUC_PRINTF(1,2);
+CDIO_EXTERN void cdio_error (const char format[], ...) GNUC_PRINTF(1,2);
 
 #ifdef __cplusplus
 }

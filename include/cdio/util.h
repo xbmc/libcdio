@@ -28,6 +28,7 @@
 */
 #include <stdlib.h>
 #include <cdio/types.h>
+#include "cdio.h"
 
 #if !defined CDIO_INLINE
 #if defined(__cplusplus) || defined(inline)
@@ -114,8 +115,8 @@ _cdio_strlenv(char **str_array);
 char **
 _cdio_strsplit(const char str[], char delim);
 
-uint8_t cdio_to_bcd8(uint8_t n);
-uint8_t cdio_from_bcd8(uint8_t p);
+CDIO_EXTERN uint8_t cdio_to_bcd8(uint8_t n);
+CDIO_EXTERN uint8_t cdio_from_bcd8(uint8_t p);
 
 /*!  cdio_realpath() same as POSIX.1-2001 realpath if that's
 around. If not we do poor-man's simulation of that behavior.  */

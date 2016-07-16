@@ -60,14 +60,14 @@ typedef struct {
 
   @param p_cdio the CD object to be acted upon.
 */
-driver_return_code_t audio_pause_win32ioctl (void *p_user_data);
+CDIO_EXTERN driver_return_code_t audio_pause_win32ioctl (void *p_user_data);
 
 /*!
   Playing starting at given MSF through analog output
 
   @param p_cdio the CD object to be acted upon.
 */
-driver_return_code_t audio_play_msf_win32ioctl (void *p_user_data,
+CDIO_EXTERN driver_return_code_t audio_play_msf_win32ioctl (void *p_user_data,
 						msf_t *p_start_msf,
 						msf_t *p_end_msf);
 /*!
@@ -76,12 +76,12 @@ driver_return_code_t audio_play_msf_win32ioctl (void *p_user_data,
   @param p_cdio the CD object to be acted upon.
 
 */
-driver_return_code_t audio_resume_win32ioctl (void *p_user_data);
+CDIO_EXTERN driver_return_code_t audio_resume_win32ioctl (void *p_user_data);
 
 /*!
   Get disc type associated with cd object.
 */
-discmode_t get_discmode_win32ioctl (_img_private_t *p_env);
+CDIO_EXTERN discmode_t get_discmode_win32ioctl (_img_private_t *p_env);
 
 /*!
   Get the volume settings of an audio CD.
@@ -89,7 +89,7 @@ discmode_t get_discmode_win32ioctl (_img_private_t *p_env);
   @param p_cdio the CD object to be acted upon.
 
 */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 audio_get_volume_win32ioctl ( void *p_user_data,
 			      /*out*/ cdio_audio_volume_t *p_volume);
 
@@ -99,7 +99,7 @@ audio_get_volume_win32ioctl ( void *p_user_data,
   @param p_cdio the CD object to be acted upon.
 
 */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 audio_read_subchannel_win32ioctl (void *p_user_data,
 				  cdio_subchannel_t *p_subchannel);
 
@@ -109,7 +109,7 @@ audio_read_subchannel_win32ioctl (void *p_user_data,
   @param p_cdio the CD object to be acted upon.
 
 */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 audio_stop_win32ioctl ( void *p_user_data );
 
 /*!
@@ -118,7 +118,7 @@ audio_stop_win32ioctl ( void *p_user_data );
   @param p_cdio the CD object to be acted upon.
 
 */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 audio_set_volume_win32ioctl ( void *p_user_data,
 			      cdio_audio_volume_t *p_volume);
 
@@ -128,29 +128,29 @@ audio_set_volume_win32ioctl ( void *p_user_data,
   @param p_user_data the CD object to be acted upon.
 
 */
-driver_return_code_t close_tray_win32ioctl (const char *psz_win32_drive);
+CDIO_EXTERN driver_return_code_t close_tray_win32ioctl (const char *psz_win32_drive);
 
 /*!
    Reads an audio device using the DeviceIoControl method into data
    starting from lsn.  Returns 0 if no error.
 */
-int read_audio_sectors_win32ioctl (_img_private_t *p_obj, void *p_data, lsn_t lsn,
+CDIO_EXTERN int read_audio_sectors_win32ioctl (_img_private_t *p_obj, void *p_data, lsn_t lsn,
 				   unsigned int nblocks);
 /*!
    Reads a single mode2 sector using the DeviceIoControl method into
    data starting from lsn. Returns 0 if no error.
  */
-int read_mode2_sector_win32ioctl (_img_private_t *p_env, void *p_data,
+CDIO_EXTERN int read_mode2_sector_win32ioctl (_img_private_t *p_env, void *p_data,
 				  lsn_t lsn, bool b_form2);
 
 /*!
    Reads a single mode1 sector using the DeviceIoControl method into
    data starting from lsn. Returns 0 if no error.
  */
-int read_mode1_sector_win32ioctl (_img_private_t *p_env, void *p_data,
+CDIO_EXTERN int read_mode1_sector_win32ioctl (_img_private_t *p_env, void *p_data,
 				  lsn_t lsn, bool b_form2);
 
-const char *is_cdrom_win32ioctl (const char drive_letter);
+CDIO_EXTERN const char *is_cdrom_win32ioctl (const char drive_letter);
 
 /*!
   Run a SCSI MMC command.
@@ -167,7 +167,7 @@ const char *is_cdrom_win32ioctl (const char drive_letter);
 
   Return 0 if command completed successfully.
  */
-int run_mmc_cmd_win32ioctl( void *p_user_data,
+CDIO_EXTERN int run_mmc_cmd_win32ioctl( void *p_user_data,
 			    unsigned int i_timeout,
 			    unsigned int i_cdb,
 			    const mmc_cdb_t * p_cdb,
@@ -177,19 +177,19 @@ int run_mmc_cmd_win32ioctl( void *p_user_data,
 /*!
   Initialize internal structures for CD device.
  */
-bool init_win32ioctl (_img_private_t *p_env);
+CDIO_EXTERN bool init_win32ioctl (_img_private_t *p_env);
 
 /*!
   Read and cache the CD's Track Table of Contents and track info.
   Return true if successful or false if an error.
 */
-bool read_toc_win32ioctl (_img_private_t *p_env);
+CDIO_EXTERN bool read_toc_win32ioctl (_img_private_t *p_env);
 
 /*!
   Get the LSN of the first track of the last session of
   on the CD.
  */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 get_last_session_win32ioctl (void *p_user_data,
                              /*out*/ lsn_t *i_last_session);
 
@@ -200,7 +200,7 @@ get_last_session_win32ioctl (void *p_user_data,
   string when done with it.
 
  */
-char *get_mcn_win32ioctl (const _img_private_t *p_env);
+CDIO_EXTERN char *get_mcn_win32ioctl (const _img_private_t *p_env);
 
 /*!
   Return the international standard recording code ISRC.
@@ -209,7 +209,7 @@ char *get_mcn_win32ioctl (const _img_private_t *p_env);
   string when done with it.
 
  */
-char *get_track_isrc_win32ioctl (const _img_private_t *p_env,
+CDIO_EXTERN char *get_track_isrc_win32ioctl (const _img_private_t *p_env,
 				 track_t i_track);
 
 /*!
@@ -219,7 +219,7 @@ char *get_track_isrc_win32ioctl (const _img_private_t *p_env,
   string when done with it.
 
  */
-void get_drive_cap_aspi (const _img_private_t *p_env,
+CDIO_EXTERN void get_drive_cap_aspi (const _img_private_t *p_env,
 			 cdio_drive_read_cap_t  *p_read_cap,
 			 cdio_drive_write_cap_t *p_write_cap,
 			 cdio_drive_misc_cap_t  *p_misc_cap);
@@ -231,7 +231,7 @@ void get_drive_cap_aspi (const _img_private_t *p_env,
   string when done with it.
 
  */
-void get_drive_cap_win32ioctl (const _img_private_t *p_env,
+CDIO_EXTERN void get_drive_cap_win32ioctl (const _img_private_t *p_env,
 			       cdio_drive_read_cap_t  *p_read_cap,
 			       cdio_drive_write_cap_t *p_write_cap,
 			       cdio_drive_misc_cap_t  *p_misc_cap);
@@ -239,5 +239,5 @@ void get_drive_cap_win32ioctl (const _img_private_t *p_env,
 /*!
   Get the format (XA, DATA, AUDIO) of a track.
 */
-track_format_t get_track_format_win32ioctl(const _img_private_t *p_env,
+CDIO_EXTERN track_format_t get_track_format_win32ioctl(const _img_private_t *p_env,
 					   track_t i_track);

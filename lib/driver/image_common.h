@@ -70,30 +70,30 @@ typedef struct {
   We don't need the image any more. Free all memory associated with
   it.
  */
-void  _free_image (void *p_user_data);
+CDIO_EXTERN void  _free_image (void *p_user_data);
 
-int _eject_media_image(void *p_user_data);
+CDIO_EXTERN driver_return_code_t _eject_media_image(void *p_user_data);
 
 /*!
   Return the value associated with the key "arg".
 */
-const char * _get_arg_image (void *user_data, const char key[]);
+CDIO_EXTERN const char * _get_arg_image (void *user_data, const char key[]);
 
 /*!
   Return CD-Text object or NULL
  */
-cdtext_t * _get_cdtext_image(void *p_user_data);
+CDIO_EXTERN cdtext_t * _get_cdtext_image(void *p_user_data);
 
 /*! 
   Get disc type associated with cd_obj.
 */
-discmode_t _get_discmode_image (void *p_user_data);
+CDIO_EXTERN discmode_t _get_discmode_image (void *p_user_data);
 
 /*!
   Return the the kind of drive capabilities of device.
 
  */
-void _get_drive_cap_image (const void *user_data,
+CDIO_EXTERN void _get_drive_cap_image (const void *user_data,
                            cdio_drive_read_cap_t  *p_read_cap,
                            cdio_drive_write_cap_t *p_write_cap,
                            cdio_drive_misc_cap_t  *p_misc_cap);
@@ -102,7 +102,7 @@ void _get_drive_cap_image (const void *user_data,
   Return the number of of the first track. 
   CDIO_INVALID_TRACK is returned on error.
 */
-track_t _get_first_track_num_image(void *p_user_data);
+CDIO_EXTERN track_t _get_first_track_num_image(void *p_user_data);
 
 /*! 
   Find out if media has changed since the last call.
@@ -111,7 +111,7 @@ track_t _get_first_track_num_image(void *p_user_data);
   return codes are the same as driver_return_code_t
   We always return DRIVER_OP_UNSUPPORTED.
  */
-int get_media_changed_image(const void *p_user_data);
+CDIO_EXTERN int get_media_changed_image(const void *p_user_data);
 
 /*!
   Return the media catalog number (MCN) from the CD or NULL if there
@@ -120,12 +120,12 @@ int get_media_changed_image(const void *p_user_data);
   Note: string is malloc'd so caller has to free() the returned
   string when done with it.
   */
-char * _get_mcn_image(const void *p_user_data);
+CDIO_EXTERN char * _get_mcn_image(const void *p_user_data);
 
 /*!
   Return the number of tracks. 
 */
-track_t _get_num_tracks_image(void *p_user_data);
+CDIO_EXTERN track_t _get_num_tracks_image(void *p_user_data);
 
 
 /*!  
@@ -135,32 +135,32 @@ track_t _get_num_tracks_image(void *p_user_data);
   using track_num LEADOUT_TRACK or the total tracks+1.
 
 */
-bool _get_track_msf_image(void *p_user_data, track_t i_track, msf_t *msf);
+CDIO_EXTERN bool _get_track_msf_image(void *p_user_data, track_t i_track, msf_t *msf);
 
 /*! Return number of channels in track: 2 or 4; -2 if not
   implemented or -1 for error.
   Not meaningful if track is not an audio track.
 */
-int get_track_channels_image(const void *p_user_data, track_t i_track);
+CDIO_EXTERN int get_track_channels_image(const void *p_user_data, track_t i_track);
 
 /*! Return 1 if copy is permitted on the track, 0 if not, or -1 for error.
   Is this meaningful if not an audio track?
 */
-track_flag_t get_track_copy_permit_image(void *p_user_data, track_t i_track);
+CDIO_EXTERN track_flag_t get_track_copy_permit_image(void *p_user_data, track_t i_track);
 
 /*! Return 1 if track has pre-emphasis, 0 if not, or -1 for error.
   Is this meaningful if not an audio track?
   
   pre-emphasis is a non linear frequency response.
 */
-track_flag_t get_track_preemphasis_image(const void *p_user_data, 
+CDIO_EXTERN track_flag_t get_track_preemphasis_image(const void *p_user_data, 
                                          track_t i_track);
 
 /*! Return the starting LBA for the pregap for track number i_track.
   Track numbers start at 1.
   CDIO_INVALID_LBA is returned on error.
 */
-lba_t get_track_pregap_lba_image(const void *p_user_data, track_t i_track);
+CDIO_EXTERN lba_t get_track_pregap_lba_image(const void *p_user_data, track_t i_track);
 
 /*!
   Return the International Standard Recording Code (ISRC) for track number
@@ -169,7 +169,7 @@ lba_t get_track_pregap_lba_image(const void *p_user_data, track_t i_track);
   Note: string is malloc'd so caller has to free() the returned
   string when done with it.
 */
-char *get_track_isrc_image(const void *p_user_data, track_t i_track);
+CDIO_EXTERN char *get_track_isrc_image(const void *p_user_data, track_t i_track);
 
 /*!
   Read a data sector
@@ -191,7 +191,7 @@ char *get_track_isrc_image(const void *p_user_data, track_t i_track);
   @param i_blocks number of blocks to read.
 
   */
-driver_return_code_t 
+CDIO_EXTERN driver_return_code_t 
 read_data_sectors_image ( void *p_user_data, void *p_buf, 
                           lsn_t i_lsn,  uint16_t i_blocksize,
                           uint32_t i_blocks );
@@ -203,6 +203,6 @@ read_data_sectors_image ( void *p_user_data, void *p_buf,
 
   0 is returned if no error was found, and nonzero if there as an error.
 */
-int _set_arg_image (void *user_data, const char key[], const char value[]);
+CDIO_EXTERN int _set_arg_image (void *user_data, const char key[], const char value[]);
 
 #endif /* CDIO_DRIVER_IMAGE_COMMON_H_ */

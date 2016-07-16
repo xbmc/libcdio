@@ -136,11 +136,11 @@ cdio_log(cdio_log_level_t level, const char format[], ...)
 
 #define CDIO_LOG_TEMPLATE(level, LEVEL) \
 void \
-cdio_ ## level (const char format[], ...) \
+cdio_##level (const char format[], ...) \
 { \
   va_list args; \
   va_start (args, format); \
-  cdio_logv (CDIO_LOG_ ## LEVEL, format, args); \
+  cdio_logv (CDIO_LOG_##LEVEL, format, args); \
   va_end (args); \
 }
 

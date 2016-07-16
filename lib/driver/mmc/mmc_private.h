@@ -21,13 +21,10 @@
 /*! Convert milliseconds to seconds taking the ceiling value, i.e.
     1002 milliseconds gets rounded to 2 seconds.
 */
-#define SECS2MSECS 1000
-//static inline unsigned int 
-//msecs2secs(unsigned int msecs) 
-//{
-//  return (msecs+(SECS2MSECS-1)) / SECS2MSECS;
-//}
-#undef SECS2MSECS
+//#define SECS2MSECS 1000
+//static __inline unsigned int 
+#define msecs2secs(msecs) ((msecs+(1000-1)) / 1000)
+//#undef SECS2MSECS
 
 /***********************************************************
   MMC CdIo Operations which a driver may use. 
@@ -39,7 +36,7 @@
   @param p_user_data the CD object to be acted upon.
   
 */
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 audio_read_subchannel_mmc ( void *p_user_data, 
 			    cdio_subchannel_t *p_subchannel);
 
@@ -47,26 +44,26 @@ audio_read_subchannel_mmc ( void *p_user_data,
   Get the block size for subsequest read requests, via a SCSI MMC 
   MODE_SENSE 6 command.
 */
-int get_blocksize_mmc (void *p_user_data);
+CDIO_EXTERN int get_blocksize_mmc (void *p_user_data);
 
 /*!  
   Get the lsn of the end of the CD
   
   @return the lsn. On error return CDIO_INVALID_LSN.
 */
-lsn_t get_disc_last_lsn_mmc( void *p_user_data );
+CDIO_EXTERN lsn_t get_disc_last_lsn_mmc( void *p_user_data );
   
-void get_drive_cap_mmc (const void *p_user_data,
+CDIO_EXTERN void get_drive_cap_mmc (const void *p_user_data,
 			/*out*/ cdio_drive_read_cap_t  *p_read_cap,
 			/*out*/ cdio_drive_write_cap_t *p_write_cap,
 			/*out*/ cdio_drive_misc_cap_t  *p_misc_cap);
 
-int get_media_changed_mmc (const void *p_user_data);
+CDIO_EXTERN int get_media_changed_mmc (const void *p_user_data);
 
-char *get_mcn_mmc (const void *p_user_data);
-char *get_track_isrc_mmc (const void *p_user_data, track_t i_track);
+CDIO_EXTERN char *get_mcn_mmc (const void *p_user_data);
+CDIO_EXTERN char *get_track_isrc_mmc (const void *p_user_data, track_t i_track);
 
-driver_return_code_t get_tray_status (const void *p_user_data);
+CDIO_EXTERN driver_return_code_t get_tray_status (const void *p_user_data);
 
 /*! Read just the user data part of some sort of data sector (via 
     mmc_read_cd). 
@@ -86,21 +83,21 @@ driver_return_code_t get_tray_status (const void *p_user_data);
     M2RAW_SECTOR_SIZE, or M2F2_SECTOR_SIZE. See comment above under p_buf.
 
 */
-driver_return_code_t read_data_sectors_mmc ( void *p_user_data, 
+CDIO_EXTERN driver_return_code_t read_data_sectors_mmc ( void *p_user_data, 
 					     void *p_buf,  lsn_t i_lsn,
 					     uint16_t i_blocksize,
 					     uint32_t i_blocks );
-char *get_mcn_mmc (const void *p_user_data);
+CDIO_EXTERN char *get_mcn_mmc (const void *p_user_data);
 
 /* Set read blocksize (via MMC) */
-driver_return_code_t set_blocksize_mmc (void *p_user_data, 
+CDIO_EXTERN driver_return_code_t set_blocksize_mmc (void *p_user_data, 
 					uint16_t i_blocksize);
 
 /* Set the drive speed in CD-ROM speed units (via MMC). */
-driver_return_code_t set_drive_speed_mmc (void *p_user_data, int i_speed);
+CDIO_EXTERN driver_return_code_t set_drive_speed_mmc (void *p_user_data, int i_speed);
 
 /* Set CD-ROM drive speed  in K bytes per second. (via MMC) */
-driver_return_code_t set_speed_mmc (void *p_user_data, int i_Kbs_speed);
+CDIO_EXTERN driver_return_code_t set_speed_mmc (void *p_user_data, int i_Kbs_speed);
 
 /***********************************************************
   Miscellaenous other "private" routines. Probably need
@@ -115,29 +112,29 @@ typedef driver_return_code_t (*mmc_run_cmd_fn_t)
        cdio_mmc_direction_t e_direction, 
        unsigned int i_buf, /*in/out*/ void *p_buf );
 			     
-int mmc_set_blocksize_mmc_private ( const void *p_env, const
+CDIO_EXTERN int mmc_set_blocksize_mmc_private ( const void *p_env, const
 				    mmc_run_cmd_fn_t run_mmc_cmd,
 				    uint16_t i_blocksize );
 
 /*! 
   Get the DVD type associated with cd object.
 */
-discmode_t 
+CDIO_EXTERN discmode_t 
 mmc_get_dvd_struct_physical_private ( void *p_env,
 				      mmc_run_cmd_fn_t run_mmc_cmd, 
 				      cdio_dvd_struct_t *s );
 
 
-char *mmc_get_mcn_private ( void *p_env,
+CDIO_EXTERN char *mmc_get_mcn_private ( void *p_env,
 			    mmc_run_cmd_fn_t run_mmc_cmd
 			    );
 
-char *mmc_get_track_isrc_private ( void *p_env,
+CDIO_EXTERN char *mmc_get_track_isrc_private ( void *p_env,
 				   mmc_run_cmd_fn_t run_mmc_cmd,
 				   track_t i_track
 				   );
 
-uint8_t * mmc_read_cdtext_private ( void *p_user_data, 
+CDIO_EXTERN uint8_t * mmc_read_cdtext_private ( void *p_user_data, 
 			       mmc_run_cmd_fn_t run_mmc_cmd
 			       );
 
@@ -146,12 +143,12 @@ uint8_t * mmc_read_cdtext_private ( void *p_user_data,
   in p. We interpret this and return a bit mask set according to the 
   capabilities.
  */
-void mmc_get_drive_cap_buf(const uint8_t *p,
+CDIO_EXTERN void mmc_get_drive_cap_buf(const uint8_t *p,
 			   /*out*/ cdio_drive_read_cap_t  *p_read_cap,
 			   /*out*/ cdio_drive_write_cap_t *p_write_cap,
 			   /*out*/ cdio_drive_misc_cap_t  *p_misc_cap);
 
-driver_return_code_t
+CDIO_EXTERN driver_return_code_t
 mmc_set_blocksize_private ( void *p_env, 
 			    const mmc_run_cmd_fn_t run_mmc_cmd, 
 			    uint16_t i_blocksize);

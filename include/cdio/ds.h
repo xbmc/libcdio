@@ -30,6 +30,7 @@
 #define CDIO_DS_H_
 
 #include <cdio/types.h>
+#include "cdio.h"
 
 /** opaque types... */
 typedef struct _CdioList CdioList_t;
@@ -50,20 +51,20 @@ extern "C" {
 #endif /* __cplusplus */
 
 /** methods */
-CdioList_t *_cdio_list_new (void);
+CDIO_EXTERN CdioList_t *_cdio_list_new (void);
 
-void _cdio_list_free (CdioList_t *p_list, int free_data);
+CDIO_EXTERN void _cdio_list_free (CdioList_t *p_list, int free_data);
 
-unsigned _cdio_list_length (const CdioList_t *list);
+CDIO_EXTERN unsigned _cdio_list_length (const CdioList_t *list);
 
-void _cdio_list_prepend (CdioList_t *p_list, void *p_data);
+CDIO_EXTERN void _cdio_list_prepend (CdioList_t *p_list, void *p_data);
 
-void _cdio_list_append (CdioList_t *p_list, void *p_data);
+CDIO_EXTERN void _cdio_list_append (CdioList_t *p_list, void *p_data);
 
-void _cdio_list_foreach (CdioList_t *p_list, _cdio_list_iterfunc_t func, 
+CDIO_EXTERN void _cdio_list_foreach (CdioList_t *p_list, _cdio_list_iterfunc_t func, 
                          void *p_user_data);
 
-CdioListNode_t *_cdio_list_find (CdioList_t *p_list, 
+CDIO_EXTERN CdioListNode_t *_cdio_list_find (CdioList_t *p_list, 
                                  _cdio_list_iterfunc_t cmp_func, 
                                  void *p_user_data);
 
@@ -72,15 +73,15 @@ CdioListNode_t *_cdio_list_find (CdioList_t *p_list,
 
 /** node operations */
 
-CdioListNode_t *_cdio_list_begin (const CdioList_t *p_list);
+CDIO_EXTERN CdioListNode_t *_cdio_list_begin (const CdioList_t *p_list);
 
-CdioListNode_t *_cdio_list_end (CdioList_t *p_list);
+CDIO_EXTERN CdioListNode_t *_cdio_list_end (CdioList_t *p_list);
 
-CdioListNode_t *_cdio_list_node_next (CdioListNode_t *p_node);
+CDIO_EXTERN CdioListNode_t *_cdio_list_node_next (CdioListNode_t *p_node);
 
-void _cdio_list_node_free (CdioListNode_t *p_node, int i_free_data);
+CDIO_EXTERN void _cdio_list_node_free (CdioListNode_t *p_node, int i_free_data);
 
-void *_cdio_list_node_data (CdioListNode_t *p_node);
+CDIO_EXTERN void *_cdio_list_node_data (CdioListNode_t *p_node);
 
 #ifdef __cplusplus
 }
